@@ -1,0 +1,114 @@
+<title>Ads Copy Tag Lab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: ops console. Verdict strip on top, then one ledger table per tag dimension, segment switch sticky. */
+:root{
+  --bg:#f3f4f7;--panel:#ffffff;--fg:#14161c;--muted:#5b6070;--line:#dfe2ea;
+  --accent:#5b3fd6;--good:#13805a;--bad:#c2352b;--warn:#a86a00;--bar:#c9c0f2;
+  --display:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1116;--panel:#171a22;--fg:#e8eaf0;--muted:#9097a8;--line:#2a2f3b;--accent:#a593ff;--good:#3ccf91;--bad:#ff7a6e;--warn:#e7b04a;--bar:#3d3470;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1116;--panel:#171a22;--fg:#e8eaf0;--muted:#9097a8;--line:#2a2f3b;--accent:#a593ff;--good:#3ccf91;--bad:#ff7a6e;--warn:#e7b04a;--bar:#3d3470;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);padding-inline:16px;padding-block:28px 48px}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:28px}
+h1{font:600 clamp(26px,4vw,36px)/1.1 var(--display);margin:0;letter-spacing:.01em;text-wrap:balance}
+h2{font:600 18px/1.2 var(--display);margin:0;text-transform:uppercase;letter-spacing:.06em}
+.sub{color:var(--muted);margin:6px 0 0;max-width:68ch}
+.meta{font:12px var(--mono);color:var(--muted)}
+.verdicts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.v{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:4px;min-width:0}
+.v .tag{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.v.scale .tag{color:var(--good)}.v.kill .tag{color:var(--bad)}.v.check .tag{color:var(--warn)}
+.v b{font:600 17px var(--display)}
+.v span{color:var(--muted);font-size:13.5px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--bg);padding-block:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{font:500 13px var(--mono);border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 12px;border-radius:4px;cursor:pointer}
+.seg[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dim{display:grid;gap:10px}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+th{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+th:first-child,td:first-child{text-align:left}
+tr:last-child td{border-bottom:0}
+td.v1{font-family:var(--mono)}
+.lift{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.lift i{display:block;height:8px;border-radius:2px;background:var(--bar)}
+.lift.up i{background:var(--good)}.lift.down i{background:var(--bad)}
+.low{color:var(--muted)}.low td.v1::after{content:" *";color:var(--warn)}
+.cpa-good{color:var(--good);font-weight:500}.cpa-bad{color:var(--bad);font-weight:500}
+.note{color:var(--muted);font-size:13px;max-width:75ch}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="meta" id="meta"></div>
+    <h1>Ads copy tag lab</h1>
+    <p class="sub">Every live headline, long headline and description is tagged by attribute, then joined to Google Ads asset metrics. Read non-branded for decisions. Branded CTR is inflated by brand queries.</p>
+  </header>
+
+  <section class="verdicts" id="verdicts" aria-label="Verdicts"></section>
+
+  <div class="bar" role="group" aria-label="Segment">
+    <button class="seg" id="seg-nb" aria-pressed="true" data-seg="non_branded">Non-branded</button>
+    <button class="seg" id="seg-b" aria-pressed="false" data-seg="branded">Branded</button>
+  </div>
+
+  <div id="dims" class="wrap" style="gap:28px"></div>
+
+  <p class="note">* under 1,000 impressions, directional only. Asset metrics are "served with" metrics, so lift is correlation. Confirm a winner with a same-ad-group A/B before changing standing rules. Tags on legacy assets come from a regex tagger. New copy is tagged by the writer at generation time.</p>
+</div>
+
+<script>
+const REPORT = /*DATA*/null;
+const ORDER = ["angle","message","number_type","moment_vocab","game_specific","brand_mention","banned_word","question","lang","has_number"];
+const LABEL = {angle:"Angle",message:"Core message",number_type:"Number type",moment_vocab:"Moment vocab",game_specific:"Game named",brand_mention:"Brand named",banned_word:"Banned word present",question:"Question",lang:"Language",has_number:"Has number"};
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtUp = v => (v > 0 ? "+" : "") + Math.round(v * 100) + "%";
+const pct = v => v == null ? "–" : (v*100).toFixed(2) + "%";
+function render(seg){
+  const s = REPORT.segments[seg], root = document.getElementById("dims");
+  const all = Object.values(s)[0] || [];
+  const tot = all.reduce((a,r)=>({c:a.c+r.cost,v:a.v+r.conversions}),{c:0,v:0});
+  const avgCpa = tot.v ? tot.c/tot.v : null;
+  root.innerHTML = [...ORDER.filter(d => s[d]), ...Object.keys(s).filter(d => !ORDER.includes(d))].map(d => {
+    const rows = s[d], maxLift = Math.max(2, ...rows.map(r => r.lift_ctr || 0));
+    return `<section class="dim"><h2>${esc(LABEL[d] || d)}</h2><div class="tbl"><table>
+      <thead><tr><th>Value</th><th>Assets</th><th>Impr</th><th>CTR</th><th>CTR lift</th><th>CVR</th><th>CPA vs avg</th><th>Labels</th></tr></thead><tbody>
+      ${rows.map(r => {
+        const l = r.lift_ctr, cls = l == null ? "" : l >= 1.2 ? "up" : l <= 0.8 ? "down" : "";
+        const cpaCls = r.cpa == null || avgCpa == null || r.low_sample ? "" : r.cpa <= avgCpa*0.85 ? "cpa-good" : r.cpa >= avgCpa*1.25 ? "cpa-bad" : "";
+        const labels = Object.entries(r.labels).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${esc(k.toLowerCase())} ${esc(v)}`).join(" · ") || "–";
+        return `<tr class="${r.low_sample ? "low" : ""}"><td class="v1">${esc(r.value)}</td><td>${Number(r.assets)}</td><td>${Number(r.impressions).toLocaleString()}</td><td>${pct(r.ctr)}</td>
+          <td><div class="lift ${cls}"><span>${l == null ? "–" : Number(l)}</span><i style="width:${l ? Math.round(60*l/maxLift) : 0}px"></i></div></td>
+          <td>${pct(r.cvr)}</td><td class="${cpaCls}">${r.cpa == null || avgCpa == null ? "–" : fmtUp(r.cpa / avgCpa - 1)}</td><td style="text-align:left">${labels}</td></tr>`;
+      }).join("")}</tbody></table></div></section>`;
+  }).join("");
+}
+document.querySelectorAll(".seg").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".seg").forEach(x => x.setAttribute("aria-pressed", x === b));
+  render(b.dataset.seg);
+}));
+render("non_branded");
+function verdicts(){
+  const s = REPORT.segments.non_branded, all = Object.values(s)[0] || [];
+  const tot = all.reduce((a,r)=>({c:a.c+r.cost,v:a.v+r.conversions,i:a.i+r.impressions,k:a.k+r.clicks}),{c:0,v:0,i:0,k:0});
+  const avgCpa = tot.v ? tot.c/tot.v : null, avgCtr = tot.i ? tot.k/tot.i : null;
+  const out = [];
+  for (const [dim, rows] of Object.entries(s)) for (const r of rows) {
+    if (r.low_sample || r.cpa == null || !avgCpa) continue;
+    const cpaUp = r.cpa/avgCpa - 1, ctrUp = r.ctr/avgCtr - 1;
+    const kind = cpaUp <= -0.2 ? "scale" : cpaUp >= 0.2 ? "kill" : null;
+    if (kind) out.push({kind, dim, v: r.value, cpaUp, ctrUp});
+  }
+  out.sort((a,b)=>Math.abs(b.cpaUp)-Math.abs(a.cpaUp));
+  const el = document.getElementById("verdicts");
+  el.innerHTML = out.slice(0,6).map(o=>`<div class="v ${o.kind}"><div class="tag">${o.kind === "scale" ? "Scale" : "Kill or retest"}</div><b>${esc(LABEL[o.dim]||o.dim)}: ${esc(o.v)}</b><span>CPA ${fmtUp(o.cpaUp)} · CTR ${fmtUp(o.ctrUp)} vs segment average.</span></div>`).join("") || '<div class="v check"><div class="tag">Watch</div><b>No tag past the 20% threshold</b><span>Keep collecting data.</span></div>';
+  const rows = REPORT.segments.non_branded.angle || [];
+  document.getElementById("meta").textContent = `${rows.reduce((a,r)=>a+Number(r.assets),0)} tagged texts · non-branded · thresholds: ≥1,000 impressions, ±20% CPA`;
+}
+verdicts();
+</script>

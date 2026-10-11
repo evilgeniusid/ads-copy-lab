@@ -1,0 +1,35 @@
+{
+  "brand": "Brewly",
+  "brand_pattern": "brewly",
+  "branded_campaign_pattern": "brand",
+  "limits": {
+    "headline": [1, 30],
+    "long_headline": [70, 80],
+    "description": [85, 90]
+  },
+  "expected_counts": { "headline": 15, "long_headline": 15, "description": 10 },
+  "banned": ["best", "ultimate", "guaranteed", "revolutionary", "game-changer", "seamless", "learn more", "try now"],
+  "urgency": ["limited time", "don't miss out", "hurry", "last chance", "act now", "ends soon"],
+  "no_dashes": true,
+  "no_emoji": true,
+  "require_number": true,
+  "placement_rules": {
+    "demand_gen": { "forbid_pattern": "\\$\\s?\\d|€|\\bannual\\b|\\bmonthly\\b|per month|coupon|promo code" }
+  },
+  "tags": {
+    "angle": [
+      ["social_proof", "#1|trusted by|used by|\\d+[kK]\\+? (customers|users)|rated"],
+      ["pricing", "\\$|€|\\d+%|\\boff\\b|annual|per month|discount|plan|free trial"],
+      ["loss_aversion", "stop|never run out|don't settle|tired of|waste|miss"],
+      ["time_saved", "minutes|seconds|faster|instant|in \\d+ (min|sec)|same day"],
+      ["output", "\\d+\\s?(cups|bags|roasts|deliveries)"],
+      ["workflow", "subscribe|skip|pause|choose|delivered|doorstep|app"]
+    ],
+    "default_angle": "generic",
+    "flags": {
+      "specific_vocab": "single origin|light roast|dark roast|espresso|cold brew|pour over",
+      "has_number": "\\d",
+      "brand_mention": "brewly"
+    }
+  }
+}

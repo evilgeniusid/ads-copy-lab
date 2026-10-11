@@ -1,0 +1,114 @@
+<title>Ads Copy Tag Lab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: ops console. Verdict strip on top, then one ledger table per tag dimension, segment switch sticky. */
+:root{
+  --bg:#f3f4f7;--panel:#ffffff;--fg:#14161c;--muted:#5b6070;--line:#dfe2ea;
+  --accent:#5b3fd6;--good:#13805a;--bad:#c2352b;--warn:#a86a00;--bar:#c9c0f2;
+  --display:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1116;--panel:#171a22;--fg:#e8eaf0;--muted:#9097a8;--line:#2a2f3b;--accent:#a593ff;--good:#3ccf91;--bad:#ff7a6e;--warn:#e7b04a;--bar:#3d3470;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1116;--panel:#171a22;--fg:#e8eaf0;--muted:#9097a8;--line:#2a2f3b;--accent:#a593ff;--good:#3ccf91;--bad:#ff7a6e;--warn:#e7b04a;--bar:#3d3470;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);padding-inline:16px;padding-block:28px 48px}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:28px}
+h1{font:600 clamp(26px,4vw,36px)/1.1 var(--display);margin:0;letter-spacing:.01em;text-wrap:balance}
+h2{font:600 18px/1.2 var(--display);margin:0;text-transform:uppercase;letter-spacing:.06em}
+.sub{color:var(--muted);margin:6px 0 0;max-width:68ch}
+.meta{font:12px var(--mono);color:var(--muted)}
+.verdicts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.v{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:4px;min-width:0}
+.v .tag{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.v.scale .tag{color:var(--good)}.v.kill .tag{color:var(--bad)}.v.check .tag{color:var(--warn)}
+.v b{font:600 17px var(--display)}
+.v span{color:var(--muted);font-size:13.5px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--bg);padding-block:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{font:500 13px var(--mono);border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 12px;border-radius:4px;cursor:pointer}
+.seg[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dim{display:grid;gap:10px}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+th{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+th:first-child,td:first-child{text-align:left}
+tr:last-child td{border-bottom:0}
+td.v1{font-family:var(--mono)}
+.lift{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.lift i{display:block;height:8px;border-radius:2px;background:var(--bar)}
+.lift.up i{background:var(--good)}.lift.down i{background:var(--bad)}
+.low{color:var(--muted)}.low td.v1::after{content:" *";color:var(--warn)}
+.cpa-good{color:var(--good);font-weight:500}.cpa-bad{color:var(--bad);font-weight:500}
+.note{color:var(--muted);font-size:13px;max-width:75ch}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="meta" id="meta"></div>
+    <h1>Ads copy tag lab</h1>
+    <p class="sub">Every live headline, long headline and description is tagged by attribute, then joined to Google Ads asset metrics. Read non-branded for decisions. Branded CTR is inflated by brand queries.</p>
+  </header>
+
+  <section class="verdicts" id="verdicts" aria-label="Verdicts"></section>
+
+  <div class="bar" role="group" aria-label="Segment">
+    <button class="seg" id="seg-nb" aria-pressed="true" data-seg="non_branded">Non-branded</button>
+    <button class="seg" id="seg-b" aria-pressed="false" data-seg="branded">Branded</button>
+  </div>
+
+  <div id="dims" class="wrap" style="gap:28px"></div>
+
+  <p class="note">* under 1,000 impressions, directional only. Asset metrics are "served with" metrics, so lift is correlation. Confirm a winner with a same-ad-group A/B before changing standing rules. Tags on legacy assets come from a regex tagger. New copy is tagged by the writer at generation time.</p>
+</div>
+
+<script>
+const REPORT = {"segments":{"branded":{"angle":[{"value":"generic","assets":5,"impressions":26638,"clicks":2106,"conversions":121.18,"cost":1930.55,"ctr":0.0791,"cvr":0.0575,"cpa":15.93,"lift_ctr":0.82,"low_sample":false,"labels":{"LEARNING":3,"BEST":2}},{"value":"pricing","assets":2,"impressions":9707,"clicks":967,"conversions":31.6,"cost":1067.4,"ctr":0.0996,"cvr":0.0327,"cpa":33.78,"lift_ctr":1.13,"low_sample":false,"labels":{"LOW":2}},{"value":"loss_aversion","assets":1,"impressions":8736,"clicks":630,"conversions":50.73,"cost":580.43,"ctr":0.0721,"cvr":0.0805,"cpa":11.44,"lift_ctr":0.78,"low_sample":false,"labels":{"LEARNING":1}},{"value":"social_proof","assets":2,"impressions":8725,"clicks":1290,"conversions":63.93000000000001,"cost":1148.72,"ctr":0.1479,"cvr":0.0496,"cpa":17.97,"lift_ctr":1.81,"low_sample":false,"labels":{"LOW":2}},{"value":"time_saved","assets":1,"impressions":6928,"clicks":686,"conversions":43.28,"cost":802,"ctr":0.099,"cvr":0.0631,"cpa":18.53,"lift_ctr":1.11,"low_sample":false,"labels":{"LOW":1}},{"value":"workflow","assets":2,"impressions":5611,"clicks":439,"conversions":28.54,"cost":492.95,"ctr":0.0782,"cvr":0.065,"cpa":17.27,"lift_ctr":0.86,"low_sample":false,"labels":{"LEARNING":1,"LOW":1}},{"value":"output","assets":1,"impressions":4396,"clicks":240,"conversions":14.49,"cost":305.48,"ctr":0.0546,"cvr":0.0604,"cpa":21.08,"lift_ctr":0.59,"low_sample":false,"labels":{"BEST":1}}],"specific_vocab":[{"value":"no","assets":11,"impressions":57746,"clicks":5419,"conversions":305.92,"cost":5347.47,"ctr":0.0938,"cvr":0.0565,"cpa":17.48,"lift_ctr":1.3,"low_sample":false,"labels":{"LEARNING":4,"LOW":6,"BEST":1}},{"value":"yes","assets":3,"impressions":12995,"clicks":939,"conversions":47.83,"cost":980.05,"ctr":0.0723,"cvr":0.0509,"cpa":20.49,"lift_ctr":0.77,"low_sample":false,"labels":{"BEST":2,"LEARNING":1}}],"has_number":[{"value":"no","assets":8,"impressions":42686,"clicks":3372,"conversions":204.57,"cost":3198.43,"ctr":0.079,"cvr":0.0607,"cpa":15.63,"lift_ctr":0.74,"low_sample":false,"labels":{"LEARNING":4,"LOW":2,"BEST":2}},{"value":"yes","assets":6,"impressions":28055,"clicks":2986,"conversions":149.18,"cost":3129.08,"ctr":0.1064,"cvr":0.05,"cpa":20.98,"lift_ctr":1.35,"low_sample":false,"labels":{"LEARNING":1,"LOW":4,"BEST":1}}],"brand_mention":[{"value":"no","assets":13,"impressions":61387,"clicks":5561,"conversions":306.89000000000004,"cost":5628.87,"ctr":0.0906,"cvr":0.0552,"cpa":18.34,"lift_ctr":1.06,"low_sample":false,"labels":{"LEARNING":4,"LOW":6,"BEST":3}},{"value":"yes","assets":1,"impressions":9354,"clicks":797,"conversions":46.86,"cost":698.64,"ctr":0.0852,"cvr":0.0588,"cpa":14.91,"lift_ctr":0.94,"low_sample":false,"labels":{"LEARNING":1}}]},"non_branded":{"angle":[{"value":"generic","assets":6,"impressions":70449,"clicks":886,"conversions":46.95,"cost":956.33,"ctr":0.0126,"cvr":0.053,"cpa":20.37,"lift_ctr":0.96,"low_sample":false,"labels":{"GOOD":1,"LOW":5,"LEARNING":4,"BEST":3}},{"value":"workflow","assets":3,"impressions":57903,"clicks":606,"conversions":35.76,"cost":647.73,"ctr":0.0105,"cvr":0.059,"cpa":18.11,"lift_ctr":0.77,"low_sample":false,"labels":{"BEST":4,"LEARNING":3,"GOOD":1}},{"value":"pricing","assets":4,"impressions":38653,"clicks":482,"conversions":22.220000000000002,"cost":448.86,"ctr":0.0125,"cvr":0.0461,"cpa":20.2,"lift_ctr":0.96,"low_sample":false,"labels":{"GOOD":4,"BEST":2,"LOW":1}},{"value":"social_proof","assets":3,"impressions":38607,"clicks":765,"conversions":52.72,"cost":846.09,"ctr":0.0198,"cvr":0.0689,"cpa":16.05,"lift_ctr":1.69,"low_sample":false,"labels":{"GOOD":1,"BEST":1,"LEARNING":1,"LOW":3}},{"value":"time_saved","assets":2,"impressions":25259,"clicks":385,"conversions":22.25,"cost":342.22,"ctr":0.0152,"cvr":0.0578,"cpa":15.38,"lift_ctr":1.2,"low_sample":false,"labels":{"BEST":2,"LOW":1}},{"value":"output","assets":2,"impressions":23011,"clicks":180,"conversions":13.82,"cost":155.96,"ctr":0.0078,"cvr":0.0768,"cpa":11.29,"lift_ctr":0.58,"low_sample":false,"labels":{"GOOD":1,"BEST":1,"LEARNING":1,"LOW":1}},{"value":"loss_aversion","assets":3,"impressions":10248,"clicks":111,"conversions":8.07,"cost":109.83,"ctr":0.0108,"cvr":0.0727,"cpa":13.61,"lift_ctr":0.83,"low_sample":false,"labels":{"GOOD":1,"LOW":2}}],"specific_vocab":[{"value":"no","assets":20,"impressions":225869,"clicks":3031,"conversions":177.57000000000002,"cost":3129.64,"ctr":0.0134,"cvr":0.0586,"cpa":17.62,"lift_ctr":1.34,"low_sample":false,"labels":{"GOOD":8,"LOW":13,"LEARNING":7,"BEST":10}},{"value":"yes","assets":3,"impressions":38261,"clicks":384,"conversions":24.22,"cost":377.38,"ctr":0.01,"cvr":0.0631,"cpa":15.58,"lift_ctr":0.75,"low_sample":false,"labels":{"GOOD":1,"BEST":3,"LEARNING":2}}],"has_number":[{"value":"no","assets":12,"impressions":141932,"clicks":1595,"conversions":90.02000000000002,"cost":1618.24,"ctr":0.0112,"cvr":0.0564,"cpa":17.98,"lift_ctr":0.75,"low_sample":false,"labels":{"LOW":6,"GOOD":3,"BEST":8,"LEARNING":6}},{"value":"yes","assets":11,"impressions":122198,"clicks":1820,"conversions":111.77000000000002,"cost":1888.78,"ctr":0.0149,"cvr":0.0614,"cpa":16.9,"lift_ctr":1.33,"low_sample":false,"labels":{"GOOD":6,"LOW":7,"LEARNING":3,"BEST":5}}],"brand_mention":[{"value":"no","assets":22,"impressions":250665,"clicks":3266,"conversions":193.78000000000003,"cost":3366.69,"ctr":0.013,"cvr":0.0593,"cpa":17.37,"lift_ctr":1.18,"low_sample":false,"labels":{"GOOD":9,"LOW":12,"LEARNING":9,"BEST":12}},{"value":"yes","assets":1,"impressions":13465,"clicks":149,"conversions":8.01,"cost":140.32,"ctr":0.0111,"cvr":0.0538,"cpa":17.52,"lift_ctr":0.85,"low_sample":false,"labels":{"LOW":1,"BEST":1}}]}},"unmatched":{"rows":0,"impressions":0}};
+const ORDER = ["angle","message","number_type","moment_vocab","game_specific","brand_mention","banned_word","question","lang","has_number"];
+const LABEL = {angle:"Angle",message:"Core message",number_type:"Number type",moment_vocab:"Moment vocab",game_specific:"Game named",brand_mention:"Brand named",banned_word:"Banned word present",question:"Question",lang:"Language",has_number:"Has number"};
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtUp = v => (v > 0 ? "+" : "") + Math.round(v * 100) + "%";
+const pct = v => v == null ? "–" : (v*100).toFixed(2) + "%";
+function render(seg){
+  const s = REPORT.segments[seg], root = document.getElementById("dims");
+  const all = Object.values(s)[0] || [];
+  const tot = all.reduce((a,r)=>({c:a.c+r.cost,v:a.v+r.conversions}),{c:0,v:0});
+  const avgCpa = tot.v ? tot.c/tot.v : null;
+  root.innerHTML = [...ORDER.filter(d => s[d]), ...Object.keys(s).filter(d => !ORDER.includes(d))].map(d => {
+    const rows = s[d], maxLift = Math.max(2, ...rows.map(r => r.lift_ctr || 0));
+    return `<section class="dim"><h2>${esc(LABEL[d] || d)}</h2><div class="tbl"><table>
+      <thead><tr><th>Value</th><th>Assets</th><th>Impr</th><th>CTR</th><th>CTR lift</th><th>CVR</th><th>CPA vs avg</th><th>Labels</th></tr></thead><tbody>
+      ${rows.map(r => {
+        const l = r.lift_ctr, cls = l == null ? "" : l >= 1.2 ? "up" : l <= 0.8 ? "down" : "";
+        const cpaCls = r.cpa == null || avgCpa == null || r.low_sample ? "" : r.cpa <= avgCpa*0.85 ? "cpa-good" : r.cpa >= avgCpa*1.25 ? "cpa-bad" : "";
+        const labels = Object.entries(r.labels).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${esc(k.toLowerCase())} ${esc(v)}`).join(" · ") || "–";
+        return `<tr class="${r.low_sample ? "low" : ""}"><td class="v1">${esc(r.value)}</td><td>${Number(r.assets)}</td><td>${Number(r.impressions).toLocaleString()}</td><td>${pct(r.ctr)}</td>
+          <td><div class="lift ${cls}"><span>${l == null ? "–" : Number(l)}</span><i style="width:${l ? Math.round(60*l/maxLift) : 0}px"></i></div></td>
+          <td>${pct(r.cvr)}</td><td class="${cpaCls}">${r.cpa == null || avgCpa == null ? "–" : fmtUp(r.cpa / avgCpa - 1)}</td><td style="text-align:left">${labels}</td></tr>`;
+      }).join("")}</tbody></table></div></section>`;
+  }).join("");
+}
+document.querySelectorAll(".seg").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".seg").forEach(x => x.setAttribute("aria-pressed", x === b));
+  render(b.dataset.seg);
+}));
+render("non_branded");
+function verdicts(){
+  const s = REPORT.segments.non_branded, all = Object.values(s)[0] || [];
+  const tot = all.reduce((a,r)=>({c:a.c+r.cost,v:a.v+r.conversions,i:a.i+r.impressions,k:a.k+r.clicks}),{c:0,v:0,i:0,k:0});
+  const avgCpa = tot.v ? tot.c/tot.v : null, avgCtr = tot.i ? tot.k/tot.i : null;
+  const out = [];
+  for (const [dim, rows] of Object.entries(s)) for (const r of rows) {
+    if (r.low_sample || r.cpa == null || !avgCpa) continue;
+    const cpaUp = r.cpa/avgCpa - 1, ctrUp = r.ctr/avgCtr - 1;
+    const kind = cpaUp <= -0.2 ? "scale" : cpaUp >= 0.2 ? "kill" : null;
+    if (kind) out.push({kind, dim, v: r.value, cpaUp, ctrUp});
+  }
+  out.sort((a,b)=>Math.abs(b.cpaUp)-Math.abs(a.cpaUp));
+  const el = document.getElementById("verdicts");
+  el.innerHTML = out.slice(0,6).map(o=>`<div class="v ${o.kind}"><div class="tag">${o.kind === "scale" ? "Scale" : "Kill or retest"}</div><b>${esc(LABEL[o.dim]||o.dim)}: ${esc(o.v)}</b><span>CPA ${fmtUp(o.cpaUp)} · CTR ${fmtUp(o.ctrUp)} vs segment average.</span></div>`).join("") || '<div class="v check"><div class="tag">Watch</div><b>No tag past the 20% threshold</b><span>Keep collecting data.</span></div>';
+  const rows = REPORT.segments.non_branded.angle || [];
+  document.getElementById("meta").textContent = `${rows.reduce((a,r)=>a+Number(r.assets),0)} tagged texts · non-branded · thresholds: ≥1,000 impressions, ±20% CPA`;
+}
+verdicts();
+</script>

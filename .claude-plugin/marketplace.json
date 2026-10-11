@@ -1,0 +1,16 @@
+{
+  "name": "ads-copy-lab",
+  "owner": {
+    "name": "Laila Karomah"
+  },
+  "plugins": [
+    {
+      "name": "ads-copy-lab",
+      "source": "./",
+      "description": "Write, validate, tag, and learn from Google Ads text assets."
+    }
+  ],
+  "metadata": {
+    "description": "Ads Copy Lab: write, validate, tag, and learn from Google Ads text assets."
+  }
+}

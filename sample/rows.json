@@ -1,0 +1,1222 @@
+{
+ "rows": [
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Fresh beans in 2 days"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "2803",
+    "clicks": "42",
+    "conversions": 1.8,
+    "costMicros": "29180256"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Fresh beans in 2 days"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "9752",
+    "clicks": "174",
+    "conversions": 10.44,
+    "costMicros": "224314701"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Roasted and shipped in 24 hours"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "1617",
+    "clicks": "144",
+    "conversions": 10.97,
+    "costMicros": "188866824"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Roasted and shipped in 24 hours"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "2425",
+    "clicks": "39",
+    "conversions": 2,
+    "costMicros": "49030831"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Roasted and shipped in 24 hours"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "5002",
+    "clicks": "64",
+    "conversions": 2.74,
+    "costMicros": "80893966"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Brew better coffee in 3 minutes"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "6928",
+    "clicks": "686",
+    "conversions": 43.28,
+    "costMicros": "801997328"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Brew better coffee in 3 minutes"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "9713",
+    "clicks": "148",
+    "conversions": 6.74,
+    "costMicros": "141769628"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Brew better coffee in 3 minutes"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "6143",
+    "clicks": "108",
+    "conversions": 6.05,
+    "costMicros": "88305938"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Same day roast, next day cup"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "9403",
+    "clicks": "129",
+    "conversions": 9.46,
+    "costMicros": "112145488"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Stop drinking stale coffee"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "1727",
+    "clicks": "19",
+    "conversions": 1.62,
+    "costMicros": "22192916"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Tired of bitter supermarket beans"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "1856",
+    "clicks": "16",
+    "conversions": 1.22,
+    "costMicros": "15880703"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Never run out of beans again"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "8736",
+    "clicks": "630",
+    "conversions": 50.73,
+    "costMicros": "580426892"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Never run out of beans again"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "6665",
+    "clicks": "76",
+    "conversions": 5.23,
+    "costMicros": "71760074"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Stop wasting $5 a cup"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "9609",
+    "clicks": "103",
+    "conversions": 5.94,
+    "costMicros": "85133392"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Stop wasting $5 a cup"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "8369",
+    "clicks": "94",
+    "conversions": 5.54,
+    "costMicros": "96258565"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Trusted by 40K home baristas"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "912",
+    "clicks": "19",
+    "conversions": 1.15,
+    "costMicros": "15273374"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Trusted by 40K home baristas"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "7107",
+    "clicks": "139",
+    "conversions": 9.74,
+    "costMicros": "125637340"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Trusted by 40K home baristas"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "9224",
+    "clicks": "158",
+    "conversions": 13.06,
+    "costMicros": "167019652"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Rated 4.8 by 12K customers"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "1028",
+    "clicks": "119",
+    "conversions": 8.05,
+    "costMicros": "162053789"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Rated 4.8 by 12K customers"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "7169",
+    "clicks": "155",
+    "conversions": 9.06,
+    "costMicros": "177994247"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Used by 300 indie cafes"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "7697",
+    "clicks": "1171",
+    "conversions": 55.88,
+    "costMicros": "986670081"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Used by 300 indie cafes"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "6812",
+    "clicks": "129",
+    "conversions": 7.26,
+    "costMicros": "129626711"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Used by 300 indie cafes"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "7383",
+    "clicks": "165",
+    "conversions": 12.45,
+    "costMicros": "230537253"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Save 20% on your first bag"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "6389",
+    "clicks": "626",
+    "conversions": 16.51,
+    "costMicros": "684019573"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Save 20% on your first bag"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "1017",
+    "clicks": "16",
+    "conversions": 0.56,
+    "costMicros": "16963756"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Save 20% on your first bag"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "1076",
+    "clicks": "14",
+    "conversions": 0.53,
+    "costMicros": "9973890"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Plans from $12 per month"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "4671",
+    "clicks": "73",
+    "conversions": 2.89,
+    "costMicros": "64904396"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Free trial, cancel anytime"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "3318",
+    "clicks": "341",
+    "conversions": 15.09,
+    "costMicros": "383377850"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Free trial, cancel anytime"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "6106",
+    "clicks": "73",
+    "conversions": 2.07,
+    "costMicros": "49830218"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Free trial, cancel anytime"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "7805",
+    "clicks": "109",
+    "conversions": 4.69,
+    "costMicros": "125795201"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Pause or skip any delivery"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "3988",
+    "clicks": "314",
+    "conversions": 19.1,
+    "costMicros": "360337749"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Pause or skip any delivery"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "9445",
+    "clicks": "114",
+    "conversions": 8.4,
+    "costMicros": "122051438"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Pause or skip any delivery"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "7079",
+    "clicks": "61",
+    "conversions": 3.52,
+    "costMicros": "77009956"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Choose your roast in the app"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "9565",
+    "clicks": "110",
+    "conversions": 7.02,
+    "costMicros": "109974720"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Choose your roast in the app"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "9160",
+    "clicks": "85",
+    "conversions": 4.04,
+    "costMicros": "116805712"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Choose your roast in the app"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "1870",
+    "clicks": "18",
+    "conversions": 1.27,
+    "costMicros": "23380546"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Delivered to your doorstep weekly"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "1623",
+    "clicks": "125",
+    "conversions": 9.44,
+    "costMicros": "132608186"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Delivered to your doorstep weekly"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "7657",
+    "clicks": "91",
+    "conversions": 5.28,
+    "costMicros": "71938879"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Delivered to your doorstep weekly"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "6161",
+    "clicks": "60",
+    "conversions": 2.86,
+    "costMicros": "42668008"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Delivered to your doorstep weekly"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "6966",
+    "clicks": "67",
+    "conversions": 3.37,
+    "costMicros": "83898486"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "4 bags of single origin a month"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "4396",
+    "clicks": "240",
+    "conversions": 14.49,
+    "costMicros": "305477248"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "GOOD"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "4 bags of single origin a month"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "6134",
+    "clicks": "49",
+    "conversions": 4.33,
+    "costMicros": "38484743"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "4 bags of single origin a month"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "7668",
+    "clicks": "53",
+    "conversions": 5.03,
+    "costMicros": "44826070"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "60 cups from every bag"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "8041",
+    "clicks": "67",
+    "conversions": 3.81,
+    "costMicros": "63610520"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "60 cups from every bag"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "1168",
+    "clicks": "11",
+    "conversions": 0.65,
+    "costMicros": "9038148"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Specialty coffee for home"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "7068",
+    "clicks": "466",
+    "conversions": 30.01,
+    "costMicros": "368469415"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Specialty coffee for home"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "2396",
+    "clicks": "27",
+    "conversions": 1.88,
+    "costMicros": "25762295"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Specialty coffee for home"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "7237",
+    "clicks": "76",
+    "conversions": 3.03,
+    "costMicros": "85793575"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Specialty coffee for home"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "2910",
+    "clicks": "33",
+    "conversions": 2.19,
+    "costMicros": "26964763"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Brewly coffee subscription"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "9354",
+    "clicks": "797",
+    "conversions": 46.86,
+    "costMicros": "698643861"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LOW"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Brewly coffee subscription"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "5736",
+    "clicks": "58",
+    "conversions": 2.34,
+    "costMicros": "75217219"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Brewly coffee subscription"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "7729",
+    "clicks": "91",
+    "conversions": 5.67,
+    "costMicros": "65103955"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Light roast single origin beans"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "5403",
+    "clicks": "393",
+    "conversions": 17.66,
+    "costMicros": "247340078"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Light roast single origin beans"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "3998",
+    "clicks": "47",
+    "conversions": 2.45,
+    "costMicros": "42953194"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "DESCRIPTION",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Light roast single origin beans"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Home Baristas",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "8667",
+    "clicks": "94",
+    "conversions": 5.37,
+    "costMicros": "95419064"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Cold brew ready beans"
+    }
+   },
+   "campaign": {
+    "name": "Search - Brand - US",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "3196",
+    "clicks": "306",
+    "conversions": 15.68,
+    "costMicros": "427229820"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "LEARNING"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Cold brew ready beans"
+    }
+   },
+   "campaign": {
+    "name": "Demand Gen - Coffee Lovers",
+    "advertisingChannelType": "DEMAND_GEN"
+   },
+   "metrics": {
+    "impressions": "8226",
+    "clicks": "90",
+    "conversions": 4.54,
+    "costMicros": "96247771"
+   }
+  },
+  {
+   "adGroupAdAssetView": {
+    "fieldType": "HEADLINE",
+    "performanceLabel": "BEST"
+   },
+   "asset": {
+    "textAsset": {
+     "text": "Cold brew ready beans"
+    }
+   },
+   "campaign": {
+    "name": "Search - Generic - Coffee Subscription",
+    "advertisingChannelType": "SEARCH"
+   },
+   "metrics": {
+    "impressions": "3568",
+    "clicks": "51",
+    "conversions": 2.5,
+    "costMicros": "59444408"
+   }
+  }
+ ]
+}

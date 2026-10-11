@@ -1,0 +1,5 @@
+.env
+node_modules/
+rows.json
+!sample/rows.json
+*.local.json

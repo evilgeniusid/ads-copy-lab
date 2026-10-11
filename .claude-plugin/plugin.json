@@ -1,0 +1,8 @@
+{
+  "name": "ads-copy-lab",
+  "version": "0.1.0",
+  "description": "Write, validate, tag, and learn from Google Ads text assets. Brand rules live in one config file; a refine loop joins copy tags with Google Ads metrics.",
+  "author": { "name": "Laila Karomah", "url": "https://evilgenius.id" },
+  "license": "MIT",
+  "keywords": ["google-ads", "copywriting", "performance-marketing", "verbalized-sampling", "refine-loop"]
+}
