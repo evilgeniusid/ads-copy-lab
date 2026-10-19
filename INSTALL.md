@@ -39,7 +39,21 @@ node scripts/test.mjs             # should print: all checks pass
 
 ## Set it up for your brand
 
-### 1. Config: `config/brand.json`
+### Recommended: guided setup
+In Claude Code, type `set up ads copy lab for my brand`. The `ads-setup` skill:
+1. asks 6 questions (brand and URL, allowed product facts, pricing policy, audience, forbidden words, placements);
+2. reads your website and tags every fact with its source;
+3. imports past ads if you have them: a connected Google Ads tool, or a CSV export from the Assets report (`node scripts/import_ads_csv.mjs export.csv data/`);
+4. shows the drafted files and writes them only after you confirm;
+5. with past ads, audits your live ads against your rules and builds your first Tag Lab.
+
+Without past ads, the validator works on day 1 and `learnings.md` fills in as data arrives.
+
+### Manual setup (fallback)
+
+Your files go in your project, not in the plugin folder, so plugin updates never overwrite them.
+
+### 1. Config: copy `config/brand.json` (the sample) to `.ads-copy-lab/brand.json`
 | Field | What to put |
 |---|---|
 | `brand`, `brand_pattern` | Brand name and a regex that matches it in copy |
@@ -52,7 +66,7 @@ node scripts/test.mjs             # should print: all checks pass
 | `tags.angle` | Ordered `[name, regex]` pairs; the first match wins |
 | `tags.flags` | Yes/no tags, e.g. product vocabulary, brand mention |
 
-### 2. References: `skills/ads-copywriter/references/`
+### 2. References: copy `skills/ads-copywriter/references/*.template.md` to `.ads-copy-lab/references/`
 Copy each `*.template.md` to the same name without `.template` and fill it in:
 - `brand-rules.md`: role, audience, product facts, output shape
 - `brand-voice.md`: voice pillars, say/not-say list, core messages
@@ -61,7 +75,7 @@ Copy each `*.template.md` to the same name without `.template` and fill it in:
 
 ### 3. Validate one asset file before trusting it
 ```bash
-node scripts/lab.mjs validate config/brand.json my-assets.json
+node scripts/lab.mjs validate .ads-copy-lab/brand.json my-assets.json
 ```
 `my-assets.json` shape:
 ```json

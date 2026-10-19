@@ -31,14 +31,19 @@ Claude Code is an app that runs in a terminal window; you type plain English and
    /plugin install ads-copy-lab@ads-copy-lab
    ```
 
-5. Ask Claude "which skills and agents do you have?" and look for the `ads-copywriter` skill and the `ad-copy-executor` and `ad-tagger` agents. Restart Claude Code if they do not appear.
-6. Type your first brief:
+5. Ask Claude "which skills and agents do you have?" and look for the `ads-copywriter` and `ads-setup` skills and the `ad-copy-executor` and `ad-tagger` agents. Restart Claude Code if they do not appear.
+6. Set up your brand (about 10 minutes, once):
+
+   ```
+   set up ads copy lab for my brand
+   ```
+
+   Claude asks 6 questions, reads your website, and optionally imports your past ads (from a connected Google Ads tool or a CSV export). It shows you the brand files it drafted and writes them only after you confirm. With past ads you also get an audit of your live ads and your first Tag Lab.
+7. Type your first brief:
 
    ```
    Demand Gen, spring sale, returning customers, EN
    ```
-
-   Out of the box, `config/brand.json` holds the sample brand Brewly. Set up your own brand first: [INSTALL.md](INSTALL.md).
 
 ### Path B: I code with Claude, new to Google Ads
 
@@ -99,7 +104,7 @@ Change a model by editing the `model:` line in `agents/*.md`.
 
 Claude grounds the prompt in your data, writes the set, runs the validator until it passes, and hands you tables plus a Google Ads Editor CSV. You review and upload.
 
-To set it up for your brand, edit `config/brand.json` (character limits, banned and urgency phrases, placement rules, tag regexes) and fill the four templates in `skills/ads-copywriter/references/`. Full steps: [INSTALL.md](INSTALL.md).
+To set it up for your brand, type `set up ads copy lab for my brand`. Your brand files are saved in your project under `.ads-copy-lab/`, so plugin updates never overwrite them. Full steps: [INSTALL.md](INSTALL.md).
 
 ## What we measured (original deployment)
 

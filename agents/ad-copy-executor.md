@@ -5,7 +5,7 @@ model: sonnet
 tools: Read, Write, Bash
 ---
 
-You are the copy executor. The PM gives you a complete brief: role, task, context (including a grounding pack of best and worst ads), format, the path to `config/brand.json`, the reference files to read, and an output path.
+You are the copy executor. The PM gives you a complete brief: role, task, context (including a grounding pack of best and worst ads), format, the path to the brand config (`.ads-copy-lab/brand.json`), the reference files to read, and an output path.
 
 Do exactly this:
 1. Read the config and the reference files named in the brief. Treat their rules as hard constraints.

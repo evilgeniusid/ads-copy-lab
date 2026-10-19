@@ -39,4 +39,15 @@ for (const [angle, texts] of Object.entries(TEXTS)) {
 }
 writeFileSync(new URL('./rows.json', import.meta.url), JSON.stringify({ rows }, null, 1));
 writeFileSync(new URL('./texts.json', import.meta.url), JSON.stringify(Object.values(TEXTS).flat(), null, 1));
+
+// Same rows as a Google Ads UI export (title rows, "Impr.", "$1,234.50", a Total row), the fixture for import_ads_csv.mjs.
+const q = (v) => `"${String(v).replace(/"/g, '""')}"`;
+const usd = (micros) => '$' + (micros / 1e6).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const typeName = { HEADLINE: 'Headline', DESCRIPTION: 'Description' };
+const label = (l) => (l === 'LEARNING' ? 'Learning' : l[0] + l.slice(1).toLowerCase());
+const csv = ['Asset report', '"January 1, 2026 - March 31, 2026"', 'Asset,Asset type,Campaign,Performance,Impr.,Clicks,Conv.,Cost (USD)',
+  ...rows.map((r) => [q(r.asset.textAsset.text), typeName[r.adGroupAdAssetView.fieldType], q(r.campaign.name), label(r.adGroupAdAssetView.performanceLabel),
+    q(Number(r.metrics.impressions).toLocaleString('en-US')), r.metrics.clicks, r.metrics.conversions, q(usd(Number(r.metrics.costMicros)))].join(',')),
+  'Total: Account,,,,,,,'];
+writeFileSync(new URL('./ads_export.csv', import.meta.url), csv.join('\n') + '\n');
 console.log(`wrote ${rows.length} rows, ${Object.values(TEXTS).flat().length} texts (synthetic)`);

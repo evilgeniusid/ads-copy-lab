@@ -1,4 +1,4 @@
-// Config-driven validator and tagger. Every brand rule lives in config/brand.json.
+// Config-driven validator and tagger. Every brand rule lives in the brand config passed as the first argument (config/brand.json is the sample).
 // Usage: node lab.mjs validate <config.json> <assets.json> | node lab.mjs tag <config.json> <texts.json>
 import { readFileSync } from 'node:fs';
 

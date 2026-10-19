@@ -5,6 +5,7 @@ import { validate, tag } from './lab.mjs';
 import { buildReport } from './tag_report.mjs';
 import { stats } from './compare_arms.mjs';
 import { toCsv } from './to_editor_csv.mjs';
+import { importRows, toNumber } from './import_ads_csv.mjs';
 
 const cfg = JSON.parse(readFileSync(new URL('../config/brand.json', import.meta.url)));
 
@@ -28,6 +29,17 @@ const tags = JSON.parse(readFileSync(new URL('../sample/texts.json', import.meta
 const rep = buildReport(rows, tags, cfg.branded_campaign_pattern);
 assert(rep.segments.branded.angle && rep.segments.non_branded.angle, 'both segments');
 assert.equal(rep.unmatched.rows, 0);
+
+// Google Ads UI CSV import: same rows as sample/rows.json, title and Total rows skipped, currency parsed.
+const imp = importRows(readFileSync(new URL('../sample/ads_export.csv', import.meta.url), 'utf8'));
+assert.equal(imp.rows.length, rows.rows.length, 'csv row count');
+assert.equal(imp.skipped, 1, 'total row skipped');
+const sum = (rs, k) => rs.reduce((a, r) => a + Number(r.metrics[k]), 0);
+for (const k of ['impressions', 'clicks']) assert.equal(sum(imp.rows, k), sum(rows.rows, k), `csv ${k}`);
+assert(Math.abs(sum(imp.rows, 'costMicros') - sum(rows.rows, 'costMicros')) < 1e6, 'csv cost within $1');
+assert.equal(buildReport(imp, tags, cfg.branded_campaign_pattern).unmatched.rows, 0, 'csv rows match tags');
+assert.equal(toNumber('$1,234.50'), 1234.5);
+assert.equal(toNumber('1.234,50'), 1234.5);
 
 const s = stats({ placement: 'search', assets: [{ type: 'headline', text: 'Fresh beans in 2 days' }] }, cfg);
 assert.equal(s.pass, 1);

@@ -1,16 +1,16 @@
 ---
 name: ads-copywriter
-description: Write, validate, tag, and refine Google Ads text assets (headlines, long headlines, descriptions) for any brand. Brand rules live in config/brand.json plus four reference templates. Includes a validator, a config-driven tagger, verbalized-sampling exploration, and a refine loop that joins tags with Google Ads asset metrics. Use when the user gives an ad copy brief ("15 headlines for our spring sale, Search, EN"), asks to refresh RSA or Demand Gen assets, or asks which copy attributes drive CTR or CPA.
+description: Write, validate, tag, and refine Google Ads text assets (headlines, long headlines, descriptions) for any brand. Brand rules live in the user's project under .ads-copy-lab/ (brand.json plus four reference files), created by the ads-setup skill. Includes a validator, a config-driven tagger, verbalized-sampling exploration, and a refine loop that joins tags with Google Ads asset metrics. Use when the user gives an ad copy brief ("15 headlines for our spring sale, Search, EN"), asks to refresh RSA or Demand Gen assets, or asks which copy attributes drive CTR or CPA.
 ---
 
 # ads-copywriter
 
-Paths below are relative to the plugin root (`${CLAUDE_PLUGIN_ROOT}`).
+Scripts live in the plugin root (`${CLAUDE_PLUGIN_ROOT}`); run them as `node ${CLAUDE_PLUGIN_ROOT}/scripts/...`. The user's brand files live in the current project under `.ads-copy-lab/`: `brand.json` and `references/{brand-rules,brand-voice,decisions,learnings}.md`.
 
 ## Setup (once per brand)
-1. Copy `config/brand.json` and edit: limits, banned and urgency phrases, placement rules, tag regexes.
-2. Fill the four files in `skills/ads-copywriter/references/` (drop `.template` from the names).
-3. `decisions.md` wins whenever two references disagree.
+Before any brief, check: if `.ads-copy-lab/brand.json` or `.ads-copy-lab/references/brand-rules.md` does not exist in the current project, stop and run the `ads-setup` skill first. Never write copy for a user's brand from the sample brand or from empty templates.
+- Manual fallback: copy `config/brand.json` (the sample) to `.ads-copy-lab/brand.json` and edit it, then copy each `skills/ads-copywriter/references/*.template.md` to `.ads-copy-lab/references/` without `.template` and fill it in.
+- `decisions.md` wins whenever two references disagree.
 
 ## Delegation (the session model is the PM, not the executor)
 | Role | Who | Does |
@@ -45,7 +45,7 @@ Add to the prompt: "For each angle generate 5 headlines. For EACH, state p = pro
 
 ## 4. Validate (never skip)
 ```
-node scripts/lab.mjs validate config/brand.json assets.json
+node ${CLAUDE_PLUGIN_ROOT}/scripts/lab.mjs validate .ads-copy-lab/brand.json assets.json
 ```
 Models miscount characters; the script decides. Fix every error and rerun until `ok: true`.
 
@@ -57,14 +57,16 @@ node scripts/to_editor_csv.mjs deploy.json   # {campaign, ad_group, final_url, a
 A human reviews and uploads. Never claim assets are live without checking.
 
 ## 6. Refine loop (weekly)
-1. Pull asset metrics with GAQL (`ad_group_ad_asset_view`: field_type, performance_label, asset.text_asset.text, campaign.name, impressions, clicks, conversions, cost_micros). Save as `rows.json`.
-2. Tag texts: `node scripts/lab.mjs tag config/brand.json texts.json > tags.json` (regex, free). For better angle accuracy, dispatch `ad-tagger` on the same texts and use its tags only if it beats the regex on your gold set.
-3. Report: `node scripts/tag_report.mjs rows.json tags.json config/brand.json > report.json`
+1. Pull asset metrics for the last 90 days and save as `rows.json`. With a Google Ads connector, use:
+   `SELECT ad_group_ad_asset_view.field_type, ad_group_ad_asset_view.performance_label, asset.text_asset.text, campaign.name, metrics.impressions, metrics.clicks, metrics.conversions, metrics.cost_micros FROM ad_group_ad_asset_view WHERE segments.date BETWEEN '<start>' AND '<end>' AND metrics.impressions > 0 AND ad_group_ad_asset_view.field_type IN ('HEADLINE','LONG_HEADLINE','DESCRIPTION') ORDER BY metrics.impressions DESC LIMIT 1000`
+   Without one, export the Assets report from the Google Ads UI as CSV and run `node scripts/import_ads_csv.mjs <export.csv> <outdir>`.
+2. Tag texts: `node ${CLAUDE_PLUGIN_ROOT}/scripts/lab.mjs tag .ads-copy-lab/brand.json texts.json > tags.json` (regex, free). For better angle accuracy, dispatch `ad-tagger` on the same texts and use its tags only if it beats the regex on your gold set.
+3. Report: `node ${CLAUDE_PLUGIN_ROOT}/scripts/tag_report.mjs rows.json tags.json .ads-copy-lab/brand.json > report.json`
 4. Dashboard: `node scripts/build_dashboard.mjs dashboard.template.html report.json dashboard.html`
-5. Change a standing rule only when a tag value has ≥1,000 impressions and ≥20% CPA or CTR difference that holds 2 weeks, or wins an A/B test. Record it in `learnings.md`.
+5. Change a standing rule only when a tag value has ≥1,000 impressions and ≥20% CPA or CTR difference that holds 2 weeks, or wins an A/B test. Record it in `.ads-copy-lab/references/learnings.md`.
 
 ## Measure the tooling
 - Tagger accuracy: label ~60 texts blind, then `python3 scripts/eval_tagger.py pred.json gold.json`. Read angle findings with caution below ~85% accuracy.
-- Prompt arms: `node scripts/compare_arms.mjs config/brand.json plain.json vs.json`.
+- Prompt arms: `node ${CLAUDE_PLUGIN_ROOT}/scripts/compare_arms.mjs .ads-copy-lab/brand.json plain.json vs.json`.
 
 Asset-level metrics are correlation, not causation.
