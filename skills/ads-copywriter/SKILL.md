@@ -11,6 +11,7 @@ Scripts live in the plugin root (`${CLAUDE_PLUGIN_ROOT}`); run them as `node ${C
 Before any brief, check: if `.ads-copy-lab/brand.json` or `.ads-copy-lab/references/brand-rules.md` does not exist in the current project, stop and run the `ads-setup` skill first. Never write copy for a user's brand from the sample brand or from empty templates.
 - Manual fallback: copy `config/brand.json` (the sample) to `.ads-copy-lab/brand.json` and edit it, then copy each `skills/ads-copywriter/references/*.template.md` to `.ads-copy-lab/references/` without `.template` and fill it in.
 - `decisions.md` wins whenever two references disagree.
+- Copy craft rules ship with the plugin in `${CLAUDE_PLUGIN_ROOT}/skills/ads-copywriter/references/ogilvy-rules.md` (brand-neutral). Brand references and `decisions.md` win over it.
 
 ## Delegation (the session model is the PM, not the executor)
 | Role | Who | Does |
@@ -38,7 +39,7 @@ Build a grounding pack from the user's own data before writing:
 - If the top texts share one campaign, label them "copy the pattern, not the topic".
 
 ## 2. Generate (plain prompt, main set)
-Write an RTCF brief (Role + Task + Context + Format, grounding pack in Context) and dispatch `ad-copy-executor` to produce the full set from `expected_counts`, tagged with `angle`, config flags, and `vs_tier: plain`.
+Before the brief, write the positioning in one sentence (what it does + who it is for) and pick the one specific fact each angle will carry. Write an RTCF brief (Role + Task + Context + Format, grounding pack in Context) and dispatch `ad-copy-executor` to produce the full set from `expected_counts`, tagged with `angle`, config flags, and `vs_tier: plain`. Name `ogilvy-rules.md` in the reference paths so the executor writes with it: one benefit per asset, specific facts from the brief only, audience or category named, positively good not superior, no puns or blind headlines.
 
 ## 3. Explore with verbalized sampling (optional, 3–5 headlines per ad group)
 Add to the prompt: "For each angle generate 5 headlines. For EACH, state p = probability a typical model writes this idea. At least 2 per angle must have p < 0.10." Keep only p < 0.10 candidates that pass validation; tag them `vs_tier: low`. High-p output duplicates the plain arm, so drop it.
@@ -49,8 +50,11 @@ node ${CLAUDE_PLUGIN_ROOT}/scripts/lab.mjs validate .ads-copy-lab/brand.json ass
 ```
 Models miscount characters; the script decides. Fix every error and rerun until `ok: true`.
 
+### 4b. Self-check (after the Validator passes)
+Validator errors come first; never score a set that still fails. Then score each asset on the 10-point self-check in `ogilvy-rules.md` (1, 0, or n/a; items that need data the brief lacks, such as news or proof, are n/a). Ship threshold: at least 80% of applicable items, and items 1, 6, and 7 pass. Rewrite assets below threshold, rerun the Validator, and score again. Report the set score in the deliverable: assets at or above threshold, mean score, most-failed items. The self-check is judgment; it never overrides the Validator.
+
 ## 5. Deliver
-Tables with character counts per group, strongest combo with rationale, deployment notes with assumptions and flags. Export for Google Ads Editor:
+Tables with character counts and self-check score per group, set score, strongest combo with rationale, deployment notes with assumptions and flags. Export for Google Ads Editor:
 ```
 node scripts/to_editor_csv.mjs deploy.json   # {campaign, ad_group, final_url, assets}
 ```
