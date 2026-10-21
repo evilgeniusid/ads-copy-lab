@@ -13,13 +13,19 @@
   "no_dashes": true,
   "no_emoji": true,
   "require_number": true,
+  "no_repeated_punctuation": true,
+  "filler_words": ["always", "truly", "really", "very", "indeed", "totally", "absolutely"],
+  "max_same_ending": 3,
   "placement_rules": {
-    "demand_gen": { "forbid_pattern": "\\$\\s?\\d|€|\\bannual\\b|\\bmonthly\\b|per month|coupon|promo code" }
+    "demand_gen": {
+      "forbid_pattern": "\\$\\s?\\d|€|\\bannual\\b|\\bmonthly\\b|per month|coupon|promo code",
+      "limits": { "headline": [1, 40] }
+    }
   },
   "tags": {
     "angle": [
       ["social_proof", "#1|trusted by|used by|\\d+[kK]\\+? (customers|users)|rated"],
-      ["pricing", "\\$|€|\\d+%|\\boff\\b|annual|per month|discount|plan|free trial"],
+      ["pricing", "\\$|€|£|\\boff\\b|annual|per month|discount|\\bplans?\\b|\\bprices?\\b|free trial|save \\d+%"],
       ["loss_aversion", "stop|never run out|don't settle|tired of|waste|miss"],
       ["time_saved", "minutes|seconds|faster|instant|in \\d+ (min|sec)|same day"],
       ["output", "\\d+\\s?(cups|bags|roasts|deliveries)"],

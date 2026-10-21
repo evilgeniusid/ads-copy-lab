@@ -47,8 +47,8 @@ Ask: "Do you have past Google Ads data? (a) connected Google Ads tool, (b) a CSV
 - `.ads-copy-lab/brand.json`: start from a copy of `${CLAUDE_PLUGIN_ROOT}/config/brand.json` (the sample).
   - Set `brand`, `brand_pattern` (regex for the brand name), and `branded_campaign_pattern` (ask how branded campaigns are named; default `brand`).
   - Add answer 5 to `banned`.
-  - Set `placement_rules` from answer 3 (e.g. forbid prices in Demand Gen).
-  - Keep `limits` (Google's limits), `urgency`, `no_dashes`, `no_emoji`, `require_number`.
+  - Set `placement_rules` from answer 3 (e.g. forbid prices in Demand Gen). Keep the per-placement `limits` (Demand Gen headlines go to 40).
+  - Keep `limits` (Google's limits), `urgency`, `no_dashes`, `no_emoji`, `require_number`, `no_repeated_punctuation`, `filler_words`, `max_same_ending`.
   - Rewrite `tags.angle` regexes only if the user's vocabulary clearly differs; otherwise keep the defaults.
 - `brand-rules.md`, `brand-voice.md`: follow the structure of `${CLAUDE_PLUGIN_ROOT}/skills/ads-copywriter/references/*.template.md`. Every product fact keeps its source tag.
   - With ad history (a/b), take voice examples from the 5 lowest-CPA non-branded texts (≥5 conversions), labelled "from your ads".

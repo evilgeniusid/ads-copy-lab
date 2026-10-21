@@ -10,8 +10,11 @@ export function validate(input, cfg) {
   const counts = {};
   const assets = [];
   const seen = new Map();
-  const forbid = cfg.placement_rules?.[input.placement]?.forbid_pattern;
-  const placementRe = forbid ? new RegExp(forbid, 'i') : null;
+  const prule = cfg.placement_rules?.[input.placement] || {};
+  const placementRe = prule.forbid_pattern ? new RegExp(prule.forbid_pattern, 'i') : null;
+  const filler = new Set((cfg.filler_words || []).map((w) => String(w).toLowerCase()));
+  const tails = {}; // type -> last word -> asset indexes
+  const lastWord = (t) => (t.toLowerCase().match(/[\p{L}\p{N}']+(?=[^\p{L}\p{N}']*$)/u) || [''])[0];
 
   (input.assets || []).forEach((asset, idx) => {
     const { type, text } = asset;
@@ -24,12 +27,18 @@ export function validate(input, cfg) {
       if (severity === 'error') ok = false;
     };
 
-    const lim = cfg.limits?.[type];
+    const lim = prule.limits?.[type] || cfg.limits?.[type];
     if (lim && (chars < lim[0] || chars > lim[1])) add('length', 'error', `${chars} chars (need ${lim[0]}-${lim[1]})`);
     if (cfg.no_dashes && /[–—]/.test(text)) add('dash', 'error', 'em/en dash');
     if (cfg.no_emoji && /\p{Extended_Pictographic}/u.test(text)) add('emoji', 'error', 'emoji');
     for (const p of cfg.banned || []) if (p && phraseRe(p).test(text)) add('banned', 'error', `"${p}"`);
     for (const p of cfg.urgency || []) if (p && phraseRe(p).test(text)) add('urgency', 'error', `"${p}"`);
+    // Google Ads editorial policy rejects punctuation repeated in a row, like "flowers!!".
+    if (cfg.no_repeated_punctuation && /[!?]{2,}|([.,;:*])\1/.test(text)) add('punctuation', 'error', 'repeated punctuation');
+    // Padding: a filler word tacked on the end to reach a length ("...in 2 days fast always.").
+    const tail = lastWord(text);
+    if (filler.has(tail)) add('filler', 'error', `"${tail}"`);
+    if (tail) ((tails[type] ||= {})[tail] ||= []).push(idx);
     if (placementRe?.test(text)) add('placement', 'error', `not allowed in ${input.placement}`);
     if (cfg.require_number && !branded && !/\d/.test(text)) add('no_number', 'warn', 'no number');
     const key = type + '|' + text.trim().toLowerCase();
@@ -37,6 +46,17 @@ export function validate(input, cfg) {
     else seen.set(key, idx);
     assets.push({ index: idx, type, text, chars, ok });
   });
+
+  // Same last word on many lines of one type reads as padding; a warning, since a product noun can repeat on purpose.
+  const most = cfg.max_same_ending;
+  if (Number.isInteger(most) && most > 0) {
+    for (const [type, words] of Object.entries(tails)) {
+      for (const [w, idxs] of Object.entries(words)) {
+        if (idxs.length <= most || filler.has(w)) continue;
+        for (const index of idxs) issues.push({ index, type, text: input.assets[index].text, rule: 'same_ending', severity: 'warn', detail: `"${w}" ends ${idxs.length} lines` });
+      }
+    }
+  }
 
   const expected = cfg.expected_counts || {};
   for (const type of new Set([...Object.keys(counts), ...Object.keys(expected)])) {

@@ -23,6 +23,24 @@ assert.equal(r.ok, false);
 assert.equal(tag('Trusted by 40K home baristas', cfg).angle, 'social_proof');
 assert.equal(tag('Specialty coffee for home', cfg).angle, 'generic');
 assert.equal(tag('Brewly cold brew', cfg).brand_mention, 'yes');
+// Pricing needs price context: a percentage alone ("100% natural") is not a price.
+assert.notEqual(tag('Handmade soap, 100% natural', cfg).angle, 'pricing');
+assert.equal(tag('Hurry, 20% off your first bag', cfg).angle, 'pricing');
+assert.equal(tag('Plans from 14 a bag', cfg).angle, 'pricing');
+
+// Repeated punctuation, filler endings, the same ending on many lines, Demand Gen headline limit 40.
+const pad = validate({ placement: 'demand_gen', assets: [
+  { type: 'headline', text: 'Free shipping over 30 now!!' },
+  { type: 'headline', text: 'Really? Yes?! 2 bags' },
+  { type: 'headline', text: 'Handmade soap that lasts 6 weeks' },
+  ...['Fresh beans in 2 days always.', 'Roasted to order in 2 days', 'Single origin in 2 days', 'Pour over kits in 2 days', 'Espresso blends in 2 days']
+    .map((text) => ({ type: 'description', text })),
+] }, cfg);
+const pg = pad.issues.map((i) => `${i.index}:${i.rule}:${i.severity}`);
+for (const s of ['0:punctuation:error', '1:punctuation:error', '3:filler:error', '4:same_ending:warn', '7:same_ending:warn']) assert(pg.includes(s), s);
+assert(!pg.some((x) => x.startsWith('2:')), 'Demand Gen headline up to 40 passes');
+assert(!pg.includes('3:same_ending:warn'), 'line ending in a filler word is not double counted');
+assert(validate({ placement: 'search', assets: [{ type: 'headline', text: 'Handmade soap that lasts 6 weeks' }] }, cfg).issues.some((i) => i.rule === 'length'), 'Search headline limit stays 30');
 
 const rows = JSON.parse(readFileSync(new URL('../sample/rows.json', import.meta.url)));
 const tags = JSON.parse(readFileSync(new URL('../sample/texts.json', import.meta.url))).map((text) => ({ text, tags: tag(text, cfg) }));
